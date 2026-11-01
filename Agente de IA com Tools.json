@@ -1,5 +1,5 @@
 {
-  "name": "Agente de IA com Tools",
+  "name": "Agente de IA com Tools_Demo",
   "nodes": [
     {
       "parameters": {
@@ -21,20 +21,14 @@
         0
       ],
       "id": "9348ff06-c9ab-4fc6-b5a1-3ce23097e983",
-      "name": "Gmail Trigger",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "J2vVj8WotdgRg9mL",
-          "name": "Gmail account"
-        }
-      }
+      "name": "Gmail Trigger"
     },
     {
       "parameters": {
         "promptType": "define",
         "text": "={{ $json.text }}",
         "options": {
-          "systemMessage": "## QUEM VOCÊ É\n\nVocê é o assistente virtual da Nova Lar Imóveis, uma imobiliária localizada em São Paulo que trabalha com venda e aluguel de apartamentos, casas e salas comerciais.\n\nSeu nome é Ana e você responde e-mails de clientes interessados em imóveis.\n\n## TOM DE VOZ\n\n- Profissional, mas acolhedor. Você quer que o cliente se sinta bem-vindo.\n- Use \"você\" (nunca \"tu\" ou \"senhor/senhora\").\n- Seja objetiva e vá direto ao ponto, sem enrolação.\n- Sempre demonstre interesse genuíno em ajudar o cliente a encontrar o imóvel ideal.\n\n## O QUE VOCÊ PODE FAZER\n\n- Responder dúvidas sobre os imóveis disponíveis.\n- Explicar como funciona o processo de compra ou aluguel.\n- Informar a documentação necessária.\n- Convidar o cliente para agendar uma visita a um imóvel.\n- Consultar a planilha de imóveis para buscar opções que atendam ao perfil do cliente.\n- Registrar os dados do lead na planilha de CRM sempre que identificar um cliente com interesse real.\n\n## INFORMAÇÕES DA EMPRESA\n\n- Regiões atendidas: Zona Sul, Zona Oeste e Centro de São Paulo.\n- Tipos de imóvel: apartamentos (studios, 1 a 4 quartos), casas e salas comerciais.\n- Faixa de preço venda: R$ 250.000 a R$ 2.500.000.\n- Faixa de preço aluguel: R$ 1.200 a R$ 12.000/mês.\n- Horário de atendimento humano: segunda a sexta, 9h às 18h / sábado, 9h às 13h.\n- Telefone/WhatsApp para agendamento de visitas: (11) 99999-0000.\n- Site: www.novalar.com.br\n\n## DOCUMENTAÇÃO\n\n### Para compra:\n- RG e CPF\n- Comprovante de renda (últimos 3 holerites ou declaração de IR)\n- Comprovante de residência\n- Certidão de estado civil\n- Se financiamento: extrato do FGTS + aprovação de crédito pelo banco\n\n### Para aluguel:\n- RG e CPF\n- Comprovante de renda (renda mínima de 3x o valor do aluguel)\n- Comprovante de residência\n- Garantia: fiador, seguro-fiança ou 3 meses de caução\n\n## PROCESSO DE COMPRA E ALUGUEL\n\n### Compra:\n1. Escolha do imóvel e visita\n2. Proposta e negociação\n3. Análise de documentação\n4. Assinatura do contrato de compra e venda\n5. Financiamento (se aplicável) e registro em cartório\nPrazo médio: 30 a 60 dias do aceite da proposta até as chaves.\n\n### Aluguel:\n1. Escolha do imóvel e visita\n2. Envio da documentação e análise de crédito\n3. Escolha da garantia (fiador, seguro-fiança ou caução)\n4. Assinatura do contrato\n5. Vistoria e entrega das chaves\nPrazo médio: 5 a 10 dias úteis após aprovação.\n\n## PERGUNTAS FREQUENTES\n\n- \"Vocês negociam preço?\" → Sim, sempre podemos apresentar uma proposta ao proprietário. O ideal é agendar uma visita primeiro e depois formalizar a proposta.\n- \"Posso usar FGTS?\" → Sim, para compra de imóveis residenciais, desde que atenda às regras da Caixa (não ter outro imóvel na cidade, etc).\n- \"Aceitam pet?\" → Depende do imóvel. Quando buscar opções, use o filtro \"Pet Friendly\" na planilha.\n- \"Tem taxa de corretagem?\" → Na venda, a comissão é paga pelo vendedor. No aluguel, não cobramos taxa do inquilino.\n\n## USO DAS FERRAMENTAS\n\n### Ferramenta: buscar_imoveis\nUse SEMPRE que o cliente perguntar sobre imóveis disponíveis, pedir recomendações ou mencionar características desejadas (bairro, quartos, preço, etc). Consulte a planilha e apresente as opções que mais se encaixam no perfil.\n\n### Ferramenta: registrar_lead\nUse SEMPRE que identificar que o cliente tem interesse real em um imóvel ou está buscando ativamente.\n\nANTES DE REGISTRAR: verifique se o e-mail do remetente já aparece na planilha de leads.\n- Se o lead JÁ EXISTE: NÃO crie uma nova linha. Apenas atualize as informações relevantes (ex: novo imóvel de interesse, mudança de orçamento, atualização de status ou próximo passo).\n- Se o lead NÃO EXISTE: crie uma nova linha com os dados abaixo.\n\nCampos para preenchimento:\n- Data: data de hoje\n- Nome: nome do cliente (extrair do e-mail)\n- E-mail: e-mail do remetente\n- Telefone: se mencionado, caso contrário \"Não informado\"\n- Interesse: Compra ou Aluguel\n- Região de Preferência: bairro ou região mencionada\n- Quartos: quantidade desejada, se mencionada\n- Orçamento Máximo: valor mencionado, se houver\n- Imóvel de Interesse (ID): ID do imóvel recomendado ou que o cliente perguntou\n- Resumo da Conversa: resumo de 1-2 frases do que o cliente precisa\n- Status: \"Novo lead\" (se novo) ou manter/atualizar o status existente\n- Próximo Passo: sugestão de ação (ex: \"Agendar visita\", \"Enviar mais opções\", etc)\n\nNÃO registre leads quando a pessoa só fez uma pergunta genérica sem demonstrar interesse real (ex: \"vocês atendem em Campinas?\" ou \"qual o horário de vocês?\").\n\n## REGRAS IMPORTANTES\n\n1. NUNCA invente informações sobre imóveis. Use SEMPRE a ferramenta buscar_imoveis para consultar a planilha antes de recomendar qualquer imóvel.\n2. Se o cliente pedir algo que não existe na planilha, diga que no momento não temos opções com esse perfil, mas que novas unidades entram toda semana, e sugira contato pelo WhatsApp.\n3. Se o cliente perguntar sobre assuntos não relacionados a imóveis, responda: \"Meu foco é te ajudar a encontrar o imóvel ideal! Como posso te ajudar com isso?\"\n4. Nunca fale mal de outras imobiliárias ou corretores.\n5. Se o cliente demonstrar interesse claro, sempre sugira agendar uma visita pelo WhatsApp (11) 99999-0000.\n6. Quando recomendar imóveis, pergunte sobre as necessidades do cliente antes de sair indicando opções.\n\n\n## FORMATAÇÃO DA RESPOSTA\n\nResponda SEMPRE em HTML válido. Use as seguintes tags para formatar:\n- <b> para negrito\n- <br> para quebras de linha\n- <ul> e <li> para listas\n- <a href=\"...\"> para links clicáveis\n\nEstruture a resposta de forma organizada: separe cada imóvel recomendado em um bloco visual claro, com quebra de linha entre eles. Não envie tudo em um único parágrafo."
+          "systemMessage": "Você é um assistente virtual de demonstração de uma imobiliária. O seu objetivo é simular o atendimento ao cliente, simulando buscas de imóveis e registo de leads. Sempre que responder, seja educado e avise que esta é uma versão de demonstração do sistema e que os dados não são reais."
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -59,13 +53,7 @@
         240
       ],
       "id": "a552d6f1-b6d8-4f8f-8524-f415871df8a0",
-      "name": "Google Gemini Chat Model",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "KjhfRHGDlTAHD9QA",
-          "name": "API Gemini Malu"
-        }
-      }
+      "name": "Google Gemini Chat Model"
     },
     {
       "parameters": {
@@ -86,15 +74,14 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1t-51MKGO9EA7s6b5fvruYrRdrrE-jpTHE7pZd7SMHmA/edit?gid=0#gid=0",
+          "value": "ID_DA_PLANILHA_IMOVEIS",
           "mode": "url"
         },
         "sheetName": {
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "Página1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1t-51MKGO9EA7s6b5fvruYrRdrrE-jpTHE7pZd7SMHmA/edit#gid=0"
+          "cachedResultName": "Página1"
         },
         "options": {}
       },
@@ -106,12 +93,6 @@
       ],
       "id": "f9b0f8c3-172f-4db8-a5d1-590b488c679d",
       "name": "buscar_imoveis",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "rWKjNeZO4qHM70gM",
-          "name": "Google Sheets account"
-        }
-      },
       "notes": "Use essa tool para consultar informações sobre imóveis disponíveis"
     },
     {
@@ -119,15 +100,14 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1baJpsSuMcLsI7UTA3gUPSXn_2bO1GmMPjOelMIVuy88/edit?gid=0#gid=0",
+          "value": "ID_DA_PLANILHA_LEADS",
           "mode": "url"
         },
         "sheetName": {
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
-          "cachedResultName": "Página1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1baJpsSuMcLsI7UTA3gUPSXn_2bO1GmMPjOelMIVuy88/edit#gid=0"
+          "cachedResultName": "Página1"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -140,318 +120,4 @@
             "Região de Preferência": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Regi_o_de_Prefer_ncia', ``, 'string') }}",
             "Quartos": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Quartos', ``, 'string') }}",
             "Orçamento Máximo (R$)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Or_amento_M_ximo__R__', ``, 'string') }}",
-            "Imóvel de Interesse (ID)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Im_vel_de_Interesse__ID_', ``, 'string') }}",
-            "Resumo da Conversa": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Resumo_da_Conversa', ``, 'string') }}",
-            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
-            "Próximo Passo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Pr_ximo_Passo', ``, 'string') }}"
-          },
-          "matchingColumns": [
-            "E-mail"
-          ],
-          "schema": [
-            {
-              "id": "Data",
-              "displayName": "Data",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Nome",
-              "displayName": "Nome",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "E-mail",
-              "displayName": "E-mail",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Telefone",
-              "displayName": "Telefone",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Interesse (Compra/Aluguel)",
-              "displayName": "Interesse (Compra/Aluguel)",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Região de Preferência",
-              "displayName": "Região de Preferência",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Quartos",
-              "displayName": "Quartos",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Orçamento Máximo (R$)",
-              "displayName": "Orçamento Máximo (R$)",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Imóvel de Interesse (ID)",
-              "displayName": "Imóvel de Interesse (ID)",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Resumo da Conversa",
-              "displayName": "Resumo da Conversa",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Status",
-              "displayName": "Status",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Próximo Passo",
-              "displayName": "Próximo Passo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheetsTool",
-      "typeVersion": 4.7,
-      "position": [
-        352,
-        240
-      ],
-      "id": "35596de9-976b-4281-ab7a-b491997b3eeb",
-      "name": "registrar_lead",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "rWKjNeZO4qHM70gM",
-          "name": "Google Sheets account"
-        }
-      },
-      "notes": "Use essa tool para registrar ou atualizar dados de leads da empresa"
-    },
-    {
-      "parameters": {
-        "operation": "reply",
-        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
-        "message": "={{ $json.output }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.2,
-      "position": [
-        496,
-        0
-      ],
-      "id": "53d31937-70a3-46ad-b04c-f5ee7a9672f7",
-      "name": "Reply to a message",
-      "webhookId": "29fcd09b-2a0a-4cf2-9fb3-781cbcde6304",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "J2vVj8WotdgRg9mL",
-          "name": "Gmail account"
-        }
-      }
-    }
-  ],
-  "pinData": {
-    "Gmail Trigger": [
-      {
-        "json": {
-          "id": "19fadc7377317639",
-          "threadId": "19fadc7377317639",
-          "labelIds": [
-            "UNREAD",
-            "IMPORTANT",
-            "CATEGORY_PERSONAL",
-            "INBOX"
-          ],
-          "sizeEstimate": 8698,
-          "headers": {
-            "delivered-to": "Delivered-To: ml9634100@gmail.com",
-            "received": "Received: from mail-sor-f41.google.com (mail-sor-f41.google.com. [209.85.220.41])\r\n        by mx.google.com with SMTPS id af79cd13be357-933d3373ec0sor82956985a.5.2026.07.29.05.09.02\r\n        for <ml9634100@gmail.com>\r\n        (Google Transport Security);\r\n        Wed, 29 Jul 2026 05:09:02 -0700 (PDT)",
-            "x-received": "X-Received: by 2002:a05:620a:1712:b0:92e:4bc9:6ea9 with SMTP id\r\n af79cd13be357-9330260c9damr614451485a.0.1785326941617; Wed, 29 Jul 2026\r\n 05:09:01 -0700 (PDT)",
-            "arc-seal": "ARC-Seal: i=1; a=rsa-sha256; t=1785326942; cv=none;\r\n        d=google.com; s=arc-20260327;\r\n        b=QS3H9FX6Y6GZMii0ZmrGcOiF0NiS3ywRJpeACud+l93kI8G1NHDJoK6qfiTw7EvBAQ\r\n         C6Y4WruKHN84ibvi7GHzhdLoJEn8J63qtdXQ/oU26HLW3oJhx8JmRDsczts0a7q5f+if\r\n         QF9uEpbnTGsmsdQZXKb/32dPzdS6001oiC3DOxmWHiiVSmORS79UvHv6QV33cGTkmerD\r\n         s4yV0clfuFDXGNnfiZnCktp2s9BjRKJvPEEYUaPvj21g/AT3uAx9IeEGik1vfoVXh7EO\r\n         euRiZocMIDORb5mZK/1o6NguraA68S5tcIIMVFIaSDtkAZz75jrrQQipWjxigjwaDgVz\r\n         Q/Qg==",
-            "arc-message-signature": "ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;\r\n        h=to:subject:message-id:date:from:mime-version:dkim-signature;\r\n        bh=gaOZOSrkqx46vZ89mL79gw1YjlX86PmEGt9SCkLi6j4=;\r\n        fh=m9pR9BsHtIPVsKUGgjq1ZOjhomOMoKDTiGR2CUfreXE=;\r\n        b=dRQnUskZ9hEdBI5errHeXJkZHCymyCqeXNsbfwH3AXvJZVjcdCtWnTthbiZbREh8wa\r\n         qODbE/6oXq7ht1TnEDCNXU/j48Gu5LsGzTkVX9iHDSgEyHBoskshivUS7shcEPjYNJwu\r\n         778IJdbuJMXnMYl7HCVzJ4FuX3bEUPauOTPC5EZDytaYpXyeG8mtLE7FN7d43DlycJ1b\r\n         Ow1pbulS6N7f+QcLNK6zKgtt5vl8xB6cOpuJr2O/SL8c8trJqJP3FsNPqNhHJH9kuFkH\r\n         f5h157UuJmAq2tugQ+5evZiTSQMwJH9VPczhOV8i7ci4+tt+H0MQvp1H3d3dfRckXj/i\r\n         nEeg==;\r\n        dara=google.com",
-            "arc-authentication-results": "ARC-Authentication-Results: i=1; mx.google.com; arc=none",
-            "return-path": "Return-Path: <b.39322m@gmail.com>",
-            "received-spf": "Received-SPF: pass (google.com: domain of b.39322m@gmail.com designates 209.85.220.41 as permitted sender) client-ip=209.85.220.41;",
-            "authentication-results": "Authentication-Results: mx.google.com;\r\n       dkim=pass header.i=@gmail.com header.s=20251104 header.b=Ck96E+iO;\r\n       arc=pass (i=1);\r\n       spf=pass (google.com: domain of b.39322m@gmail.com designates 209.85.220.41 as permitted sender) smtp.mailfrom=b.39322m@gmail.com;\r\n       dmarc=pass (p=NONE sp=QUARANTINE dis=NONE) header.from=gmail.com;\r\n       dara=pass header.i=@gmail.com",
-            "dkim-signature": "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=gmail.com; s=20251104; t=1785326942; x=1785931742; dara=google.com;\r\n        h=content-type:to:subject:message-id:date:from:mime-version:from:to\r\n         :cc:subject:date:message-id:reply-to:content-type;\r\n        bh=gaOZOSrkqx46vZ89mL79gw1YjlX86PmEGt9SCkLi6j4=;\r\n        b=Ck96E+iO6b4kK33hbvZQ25qFjyX8N6lVM28LH0oG4e6Wh2w96PRSYQuddNhP/A4gxg\r\n         n2h3fCSyNMgtlutUvlLplErbovXwWo/sPovQWYnybwvbjDkNiR4qMZ9/DwROM1g9qd+C\r\n         tT6AsC6hb/xCA32egJ/rftKZD/08RFkOM/JG9XYP3s0nOaLVZNtvMBA8VB94y9jULnmF\r\n         23k4nB3hoOLvQa3Pd4E6tEnmWK4sacxa5hvGfgAyd0Qi9k3CSczoLiXcV6o2KE3kgTJV\r\n         VPQbLyxkXxboRSCBv4EJYYKu6JUBRSovgWhW7BZmjfnm50kwJ2wXMwT+4vn1t7ArddbM\r\n         3YLQ==",
-            "x-google-dkim-signature": "X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20251104; t=1785326942; x=1785931742;\r\n        h=content-type:to:subject:message-id:date:from:mime-version:x-gm-gg\r\n         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to\r\n         :content-type;\r\n        bh=gaOZOSrkqx46vZ89mL79gw1YjlX86PmEGt9SCkLi6j4=;\r\n        b=hDa23mFYvPh4FA3AiMxDQ9uDsAir3rtya8sA96/dn/uEzKxxM9NdFiSxwvYAsflaXi\r\n         AWHFJT5WjwMoM8X5DmExQZw9CODHai1D4QSIDbNu3obV2lCBlSwcX4L86KifiGAiCSlI\r\n         ZLSb3mLL/rkdl3itWNfoisO70ocTfZhVw5pJln0bTkDCct14mFlFILi43Tb6hqqnDwdL\r\n         X/h5FJppyuvfBL2Du/f15JAkPh+dFjY9TZvhzo4S7VJ5yoz8FhS1HCWOt82tEHIKWS6D\r\n         V1kuupUDvai10o/q5Of/s4GYbdyyA3Z6+W1NDx6tq5iKs5txYGXRqIe9oGsNc/yqxXjs\r\n         vTBA==",
-            "x-gm-message-state": "X-Gm-Message-State: AOJu0YwCT9hjlN7hS8i/792NDPOaZIhYjzdYHyiUyhKYTyTRyl+MMOOo\r\n\thRSYkg8DI3K+nC8b6KcFmo9EdP+Kx61nsBBYvcexFmCOjWXZYYdQ+Dsx97bx/sfavk1+8cf/UEh\r\n\tjpS9G2XuC+jLSLxkFdVllunWp+rxzcFn06w==",
-            "x-gm-gg": "X-Gm-Gg: AR+sD12FEDMccVnURK5BTSu0D3C4+JMG4WnCpj95xO4F4Pt62tpdeRFqYrmgJVhgNfm\r\n\tUib6uu99g7f29zZ4xTY6qHBR2V/43SCCZU2caYd3yagjC+e/9hglEsZTiieLz4yngpgchtaaQS7\r\n\twaZv9/nlmFmQ36KDyOoKgGdwhUowcPSIMy8Mit8D3aLWSHur4R0xZa+oVrsoE24Pyn47xnfiMuC\r\n\tnaYGi+iPk0hoFIjMb+2oX23Ba40TuhZuKyYhv4ZkLhdR0jDyph+R5m34FPzlXIvqT6PZAb8FweH\r\n\tSMfelDesbr0BdB0eiKdApNgtWotKLg0u8JSew24HdX5hJw==",
-            "mime-version": "MIME-Version: 1.0",
-            "from": "From: Malu Silva <b.39322m@gmail.com>",
-            "date": "Date: Wed, 29 Jul 2026 09:08:50 -0300",
-            "x-gm-features": "X-Gm-Features: AUfX_myRFJHjMi7kNHdHEqwHC-NUilZdKzm8TiyjOC_LLqgCpCdLLaF5vIeMiKo",
-            "message-id": "Message-ID: <CAFVVSGmG81wYFMSQU3v2FJUmKsmC78FHtvN6xx+R_nvbsE9mVQ@mail.gmail.com>",
-            "subject": "Subject: Aluguel Apartamento",
-            "to": "To: ml9634100@gmail.com",
-            "content-type": "Content-Type: multipart/alternative; boundary=\"00000000000029c0d50657bed2f7\""
-          },
-          "html": "<div dir=\"ltr\">Olá!<div>Meu nome é Rafael Oliveira, encontrei vocês pelo site e gostaria de uma ajuda para encontrar um apartamento para alugar.</div><div><br><div>Estou procurando algo na Zona Oeste de SP de preferência em Pompeia, Perdizes ou Vila Madalena. Preciso de 2 quartos (sendo 1 que eu possa usar como home office), e meu orçamento é de R$4.500/mês, já com condomínio.</div><div>Tenho um cachorro de porte pequeno, então preciso que o prédio aceite pet.</div><div><br></div><div>Pretendo me mudar nos próximos 60 dias. Minha renda é de 15 mil/mês (CLT) e eu teria fiador se necessário.</div><div><br></div><div>Me envia por favor algumas opções que se encaixem?</div></div><div><br></div><div>Meu WhatsApp é (47) 988182588</div><div><br></div><div>Obrigado, Rafael Oliveira </div><div><br></div></div>\n",
-          "text": "Olá!\nMeu nome é Rafael Oliveira, encontrei vocês pelo site e gostaria de uma\najuda para encontrar um apartamento para alugar.\n\nEstou procurando algo na Zona Oeste de SP de preferência em Pompeia,\nPerdizes ou Vila Madalena. Preciso de 2 quartos (sendo 1 que eu possa usar\ncomo home office), e meu orçamento é de R$4.500/mês, já com condomínio.\nTenho um cachorro de porte pequeno, então preciso que o prédio aceite pet.\n\nPretendo me mudar nos próximos 60 dias. Minha renda é de 15 mil/mês (CLT) e\neu teria fiador se necessário.\n\nMe envia por favor algumas opções que se encaixem?\n\nMeu WhatsApp é (47) 988182588\n\nObrigado, Rafael Oliveira\n",
-          "textAsHtml": "<p>Ol&aacute;!<br/>Meu nome &eacute; Rafael Oliveira, encontrei voc&ecirc;s pelo site e gostaria de uma<br/>ajuda para encontrar um apartamento para alugar.</p><p>Estou procurando algo na Zona Oeste de SP de prefer&ecirc;ncia em Pompeia,<br/>Perdizes ou Vila Madalena. Preciso de 2 quartos (sendo 1 que eu possa usar<br/>como home office), e meu or&ccedil;amento &eacute; de R$4.500/m&ecirc;s, j&aacute; com condom&iacute;nio.<br/>Tenho um cachorro de porte pequeno, ent&atilde;o preciso que o pr&eacute;dio aceite pet.</p><p>Pretendo me mudar nos pr&oacute;ximos 60 dias. Minha renda &eacute; de 15 mil/m&ecirc;s (CLT) e<br/>eu teria fiador se necess&aacute;rio.</p><p>Me envia por favor algumas op&ccedil;&otilde;es que se encaixem?</p><p>Meu WhatsApp &eacute; (47) 988182588</p><p>Obrigado, Rafael Oliveira</p>",
-          "subject": "Aluguel Apartamento",
-          "date": "2026-07-29T12:08:50.000Z",
-          "to": {
-            "value": [
-              {
-                "address": "ml9634100@gmail.com",
-                "name": ""
-              }
-            ],
-            "html": "<span class=\"mp_address_group\"><a href=\"mailto:ml9634100@gmail.com\" class=\"mp_address_email\">ml9634100@gmail.com</a></span>",
-            "text": "ml9634100@gmail.com"
-          },
-          "from": {
-            "value": [
-              {
-                "address": "b.39322m@gmail.com",
-                "name": "Malu Silva"
-              }
-            ],
-            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Malu Silva</span> &lt;<a href=\"mailto:b.39322m@gmail.com\" class=\"mp_address_email\">b.39322m@gmail.com</a>&gt;</span>",
-            "text": "\"Malu Silva\" <b.39322m@gmail.com>"
-          },
-          "messageId": "<CAFVVSGmG81wYFMSQU3v2FJUmKsmC78FHtvN6xx+R_nvbsE9mVQ@mail.gmail.com>"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
-  "connections": {
-    "Gmail Trigger": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Google Gemini Chat Model": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Simple Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "buscar_imoveis": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "registrar_lead": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        [
-          {
-            "node": "Reply to a message",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1",
-    "binaryMode": "separate"
-  },
-  "versionId": "f9e58380-c7b8-4e50-ba95-cf1fb1e07ffc",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "7e886c9849de1b1ec2656057dec9be9ae9854f1deaa1ba51b1204cf0bc58518c"
-  },
-  "nodeGroups": [],
-  "id": "nMZJCedaUWCIVzqy",
-  "tags": []
-}
+            "Imóvel de Interesse (ID)": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Im_vel_de_Inter
